@@ -14,6 +14,8 @@ export namespace service {
     RETURNING *
     `;
 
+    const encryptedPassword = 
+
     const formattedQueryString = format(queryString, newUserKeys, newUserData);
 
     const createdUser: QueryResult<iUser> = await connection.query(
@@ -36,4 +38,8 @@ export namespace service {
 
     return foundUser.rows[0];
   };
+
+  export const login = () => {
+
+  }
 }
