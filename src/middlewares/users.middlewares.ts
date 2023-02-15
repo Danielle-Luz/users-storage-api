@@ -23,7 +23,7 @@ export namespace middleware {
     next: NextFunction
   ) => {
     const userEmail = req.body.email;
-    const userData = await service.getCreateUserIdByEmail(userEmail);
+    const userData = await service.getUserDataByField(userEmail, ["id"], "email");
 
     if (userData?.id) {
       throw new EmailAlreadyRegistered("E-mail already registered", 409);

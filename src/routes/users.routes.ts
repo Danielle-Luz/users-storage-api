@@ -11,3 +11,9 @@ usersRouter.post(
   middleware.userEmailIsUnique,
   controller.createUser
 );
+
+usersRouter.post(
+  "/login",
+  middleware.validateBody(schema.loginData),
+  controller.login
+);

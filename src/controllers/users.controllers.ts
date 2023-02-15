@@ -10,4 +10,12 @@ export namespace controller {
 
     return res.status(201).send(createdUser);
   };
+
+  export const login = async (req: Request, res: Response) => {
+    const loginData = req.body;
+
+    const loggedUser = await service.login(loginData);
+
+    return res.status(200).send(loggedUser);
+  };
 }

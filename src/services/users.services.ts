@@ -1,6 +1,6 @@
 import { connection } from "./../database/database.config";
 import { format } from "node-pg-format";
-import { iId, tCreateUser } from "../interfaces/users.interfaces";
+import { iId, tCreateUser, tLoginData } from "../interfaces/users.interfaces";
 import { QueryResult } from "pg";
 import { hash } from "bcryptjs";
 
@@ -29,10 +29,19 @@ export namespace service {
     return dataWithoutPassword;
   };
 
-  export const getCreateUserIdByEmail = async (searchedEmail: string) => {
-    const queryString = `SELECT id FROM users WHERE email = %L`;
+  export const getUserDataByField = async (
+    searchedValue: string,
+    selectedFields: string[],
+    comparedField: string
+  ) => {
+    const queryString = `SELECT %I FROM users WHERE %I = %L`;
 
-    const formattedQueryString = format(queryString, searchedEmail);
+    const formattedQueryString = format(
+      queryString,
+      selectedFields,
+      comparedField,
+      searchedValue
+    );
 
     const foundUser: QueryResult<iId> = await connection.query(
       formattedQueryString
@@ -41,7 +50,13 @@ export namespace service {
     return foundUser.rows[0];
   };
 
-  /* export const login = (userData) => {
+  export const login = async (userData: tLoginData) => {
+    const userWithSameEmail = await getUserDataByField(
+      userData.email,
+      ["email", "password"],
+      "email"
+    );
 
-  }; */
+    
+  };
 }
