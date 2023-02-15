@@ -61,11 +61,11 @@ export namespace service {
     const userWasNotFound = !userWithSameEmail;
     const userDontHasSamePassword = !compare(
       userData.password,
-      userWithSameEmail.password
+      userWithSameEmail?.password + ""
     );
 
     if (userWasNotFound || userDontHasSamePassword) {
-      throw new InvalidLoginDataError("Email or password are wrong", 401);
+      throw new InvalidLoginDataError("E-mail or password are wrong", 401);
     }
   };
 }

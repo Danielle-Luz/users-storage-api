@@ -30,6 +30,8 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
+  console.error(error.stack);
+
   if (error instanceof AppError) {
     const { statusCode, message } = error;
 
