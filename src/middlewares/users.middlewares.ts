@@ -1,28 +1,19 @@
 import { NextFunction, Request, Response } from "express";
+import { ZodTypeAny } from "zod";
 import { iUser } from "./../interfaces/users.interfaces";
 
-const userModel: iUser = {
-  id: 0,
-  name: "",
-  email: "",
-  password: "",
-  admin: false,
-  active: false,
-};
+export const validateBody =
+  (schema: ZodTypeAny) => (req: Request, res: Response, next: NextFunction) => {
+    const { body: payload } = req;
 
-const userModelKeys: string[] = Object.keys(userModel);
+    const validatedPayload = schema.parse(payload);
 
-export const userKeysAreValid = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const { body: payload } = req;
-  const payloadKeys: string[] = Object.keys(payload);
-};
+    req.body = validatedPayload;
+  };
 
 export const userEmailIsUnique = (
   req: Request,
   res: Response,
   next: NextFunction
-) => {};
+) => {
+};
