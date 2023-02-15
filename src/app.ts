@@ -1,6 +1,5 @@
 import { usersRouter } from "./routes/users.routes";
 import { errorHandler } from "./error";
-import "express-async-errors";
 import { Application } from "express";
 
 const express = require("express");

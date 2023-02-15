@@ -1,6 +1,6 @@
-import { iErrorMessage } from "./interfaces/index";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import { ZodError } from "zod";
+import "express-async-errors";
 
 class AppError extends Error {
   statusCode: number;
@@ -12,7 +12,13 @@ class AppError extends Error {
   }
 }
 
-export const errorHandler = (error: Error, req: Request, res: Response) => {
+export class EmailAlreadyRegistered extends AppError {
+  constructor(message: string, statusCode: number) {
+    super(message, statusCode);
+  }
+}
+
+export const errorHandler = (error: Error, req: Request, res: Response, next: NextFunction) => {
   if (error instanceof AppError) {
     const { statusCode, message } = error;
 

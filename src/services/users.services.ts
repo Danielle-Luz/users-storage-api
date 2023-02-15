@@ -20,7 +20,9 @@ export namespace service {
       formattedQueryString
     );
 
-    return createdUser.rows[0];
+    const { password, ...rest } = createdUser.rows[0];
+
+    return rest;
   };
 
   export const getUserIdByEmail = async (searchedEmail: string) => {

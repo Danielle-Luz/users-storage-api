@@ -8,5 +8,5 @@ export interface iUser {
 }
 
 export interface iId {
-  id: number;
+  id: number | null;
 }
