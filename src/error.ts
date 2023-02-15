@@ -1,3 +1,4 @@
+import { iErrorMessage } from './interfaces/index';
 import { Request, Response } from "express"
 
 class AppError extends Error {
@@ -11,5 +12,19 @@ class AppError extends Error {
 }
 
 export const errorHandler = (error: Error, req: Request, res: Response) => {
+  const errorMessage: iErrorMessage = {
+    statusCode: 500,
+    message: "Internal server error"
+  }
 
+  if (error instanceof AppError) {
+    const { statusCode, message } = error;
+
+    errorMessage.statusCode = statusCode;
+    errorMessage.message = message;
+
+    return res.status(statusCode).send(errorMessage);
+  }
+
+  return res.status(500).send(errorMessage);
 }
