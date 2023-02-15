@@ -9,7 +9,6 @@ export namespace service {
     const encryptedPassword = await hash(newUser.password, 10);
 
     newUser.password = encryptedPassword;
-
     const newUserKeys = Object.keys(newUser);
     const newUserData = Object.values(newUser);
 
