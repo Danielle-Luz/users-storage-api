@@ -2,7 +2,8 @@ import { connection } from "./../database/database.config";
 import { format } from "node-pg-format";
 import { iId, tCreateUser, tLoginData } from "../interfaces/users.interfaces";
 import { QueryResult } from "pg";
-import { hash } from "bcryptjs";
+import { compare, hash } from "bcryptjs";
+import { InvalidLoginDataError } from "../error";
 
 export namespace service {
   export const createUser = async (newUser: tCreateUser) => {
@@ -43,7 +44,7 @@ export namespace service {
       searchedValue
     );
 
-    const foundUser: QueryResult<iId> = await connection.query(
+    const foundUser: QueryResult<any> = await connection.query(
       formattedQueryString
     );
 
@@ -57,6 +58,14 @@ export namespace service {
       "email"
     );
 
-    
+    const userWasNotFound = !userWithSameEmail;
+    const userDontHasSamePassword = !compare(
+      userData.password,
+      userWithSameEmail.password
+    );
+
+    if (userWasNotFound || userDontHasSamePassword) {
+      throw new InvalidLoginDataError("Email or password are wrong", 401);
+    }
   };
 }
