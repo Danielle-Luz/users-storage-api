@@ -1,13 +1,13 @@
+import { usersRouter } from "./routes/users.routes";
 import { errorHandler } from "./error";
-import "express-async-errors";
 import { Application } from "express";
 
 const express = require("express");
 
-const app: Application = express();
+export const app: Application = express();
 
 app.use(express.json());
 
-app.use(errorHandler);
+app.use("/users", usersRouter);
 
-export { app };
+app.use(errorHandler);
