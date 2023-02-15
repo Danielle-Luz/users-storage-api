@@ -12,10 +12,17 @@ const userModel: iUser = {
 
 const userModelKeys: string[] = Object.keys(userModel);
 
-export const userEmailIsUnique = (
+export const userKeysAreValid = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  
+  const { body: payload } = req;
+  const payloadKeys: string[] = Object.keys(payload);
 };
+
+export const userEmailIsUnique = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {};
