@@ -20,6 +20,6 @@ export namespace service {
       formattedQueryString
     );
   
-    return createdUser;
+    return createdUser.rows[0];
   };
 }
