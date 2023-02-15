@@ -1,12 +1,20 @@
+import { iToken } from "./../interfaces";
 import { connection } from "./../database/database.config";
 import { format } from "node-pg-format";
-import { iId, tCreateUser, tLoginData } from "../interfaces/users.interfaces";
+import {
+  tCreateUser,
+  tLoginData,
+  tSelectUser,
+} from "../interfaces/users.interfaces";
 import { QueryResult } from "pg";
 import { compare, hash } from "bcryptjs";
 import { InvalidLoginDataError } from "../error";
+import { sign } from "jsonwebtoken";
 
 export namespace service {
-  export const createUser = async (newUser: tCreateUser) => {
+  export const createUser = async (
+    newUser: tCreateUser
+  ): Promise<tSelectUser> => {
     const encryptedPassword = await hash(newUser.password, 10);
 
     newUser.password = encryptedPassword;
@@ -34,7 +42,7 @@ export namespace service {
     searchedValue: string,
     selectedFields: string[],
     comparedField: string
-  ) => {
+  ): Promise<any> => {
     const queryString = `SELECT %I FROM users WHERE %I = %L`;
 
     const formattedQueryString = format(
@@ -51,21 +59,30 @@ export namespace service {
     return foundUser.rows[0];
   };
 
-  export const login = async (userData: tLoginData) => {
+  export const login = async (userData: tLoginData): Promise<iToken> => {
+    const { email: loginEmail, password: loginPassword } = userData;
+
     const userWithSameEmail = await getUserDataByField(
-      userData.email,
+      loginEmail,
       ["email", "password"],
       "email"
     );
 
     const userWasNotFound = !userWithSameEmail;
     const userDontHasSamePassword = !compare(
-      userData.password,
-      userWithSameEmail?.password + ""
+      loginPassword,
+      String(userWithSameEmail?.password)
     );
 
     if (userWasNotFound || userDontHasSamePassword) {
       throw new InvalidLoginDataError("E-mail or password are wrong", 401);
     }
+
+    const token = sign({ email: loginEmail }, String(process.env.SECRET_KEY), {
+      expiresIn: "24h",
+      subject: loginEmail,
+    });
+
+    return { token };
   };
 }
