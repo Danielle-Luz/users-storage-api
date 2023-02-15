@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { iUser } from "../interfaces/users.interfaces";
+import { tCreateUser } from "../interfaces/users.interfaces";
 import { service } from "../services/users.services";
 
 export namespace controller {
   export const createUser = async (req: Request, res: Response) => {
-    const newUser: iUser = req.body;
+    const newUser: tCreateUser = req.body;
 
     const createdUser = await service.createUser(newUser);
 

@@ -1,7 +1,7 @@
 import { EmailAlreadyRegistered } from "./../error";
 import { NextFunction, Request, Response } from "express";
 import { ZodTypeAny } from "zod";
-import { iUser } from "./../interfaces/users.interfaces";
+import { tCreateUser } from "./../interfaces/users.interfaces";
 import { service } from "../services/users.services";
 
 export namespace middleware {
@@ -23,7 +23,7 @@ export namespace middleware {
     next: NextFunction
   ) => {
     const userEmail = req.body.email;
-    const userData = await service.getUserIdByEmail(userEmail);
+    const userData = await service.getCreateUserIdByEmail(userEmail);
 
     if (userData?.id) {
       throw new EmailAlreadyRegistered("E-mail already registered", 409);

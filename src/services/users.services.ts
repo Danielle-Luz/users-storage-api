@@ -1,11 +1,11 @@
 import { connection } from "./../database/database.config";
 import { format } from "node-pg-format";
-import { iId, iUser } from "../interfaces/users.interfaces";
+import { iId, tCreateUser } from "../interfaces/users.interfaces";
 import { QueryResult } from "pg";
 import { hash } from "bcryptjs";
 
 export namespace service {
-  export const createUser = async (newUser: iUser) => {
+  export const createUser = async (newUser: tCreateUser) => {
     const encryptedPassword = await hash(newUser.password, 10);
 
     newUser.password = encryptedPassword;
@@ -21,7 +21,7 @@ export namespace service {
 
     const formattedQueryString = format(queryString, newUserKeys, newUserData);
 
-    const createdUser: QueryResult<iUser> = await connection.query(
+    const createdUser: QueryResult<tCreateUser> = await connection.query(
       formattedQueryString
     );
 
@@ -30,7 +30,7 @@ export namespace service {
     return dataWithoutPassword;
   };
 
-  export const getUserIdByEmail = async (searchedEmail: string) => {
+  export const getCreateUserIdByEmail = async (searchedEmail: string) => {
     const queryString = `SELECT id FROM users WHERE email = %L`;
 
     const formattedQueryString = format(queryString, searchedEmail);
@@ -42,5 +42,7 @@ export namespace service {
     return foundUser.rows[0];
   };
 
-  export const login = () => {};
+  /* export const login = (userData) => {
+
+  }; */
 }

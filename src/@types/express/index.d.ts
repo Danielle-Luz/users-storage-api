@@ -1,9 +1,9 @@
-import { iUser } from "./../../interfaces/users.interfaces";
+import { tCreateUser } from "./../../interfaces/users.interfaces";
 
 declare global {
   namespace Express {
     interface Request {
-      user: iUser;
+      user: tCreateUser;
     }
   }
 }
