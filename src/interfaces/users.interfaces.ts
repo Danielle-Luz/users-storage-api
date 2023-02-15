@@ -6,3 +6,7 @@ export interface iUser {
   admin: boolean;
   active: boolean;
 }
+
+export interface iId {
+  id: number;
+}
