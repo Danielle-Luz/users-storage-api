@@ -30,7 +30,7 @@ export class InvalidTokenError extends AppError {
   }
 }
 
-export class InactiveUserError extends AppError {
+export class UserStatusError extends AppError {
   constructor(message: string, statusCode: number) {
     super(message, statusCode);
   }
