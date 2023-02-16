@@ -134,7 +134,13 @@ export namespace service {
     );
 
     if (recoveredUserData.active) {
-      
+      throw new UserStatusError("User already active", 400);
     }
+
+    const newActiveStatus: iStatus = { active: true };
+
+    const reactivatedUser = await updateUser(newActiveStatus, recoveredUserId);
+
+    return reactivatedUser;
   };
 }
