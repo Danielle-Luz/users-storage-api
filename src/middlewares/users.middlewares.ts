@@ -45,16 +45,18 @@ export namespace middleware {
 
     const tokenWasNotSent = !tokenWithBearer;
 
+    if (tokenWasNotSent) {
+      throw new InvalidTokenError("Missing Bearer Token", 401);
+    }
+
     const token = String(tokenWithBearer).split(" ")[1];
 
     return verify(
       token,
       String(process.env.SECRET_KEY),
       async (error: any, decoded: any) => {
-        const tokenIsNotValid = error;
-
-        if (tokenIsNotValid || tokenWasNotSent) {
-          throw new InvalidTokenError("Invalid token", 401);
+        if (error) {
+          throw new InvalidTokenError(error.message, 401);
         }
 
         const userWithSameEmail = await service.getUserDataByField(
