@@ -76,7 +76,7 @@ export namespace service {
     );
 
     if (userWasNotFound || userDontHasSamePassword) {
-      throw new InvalidLoginDataError("E-mail or password are wrong", 401);
+      throw new InvalidLoginDataError("Wrong email/password", 401);
     } else if (userIsNotActive) {
       throw new InactiveUserError("The user is not active", 401);
     }
