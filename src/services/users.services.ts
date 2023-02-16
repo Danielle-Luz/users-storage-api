@@ -1,7 +1,7 @@
 import { iToken } from "./../interfaces";
 import { connection } from "./../database/database.config";
 import { format } from "node-pg-format";
-import { tCreateUser, tLoginData, tUser } from "../interfaces/users.interfaces";
+import { tCreateUser, tLoginData, tUser, tSelectUser } from "../interfaces/users.interfaces";
 import { QueryResult } from "pg";
 import { compare, hash } from "bcryptjs";
 import { InactiveUserError, InvalidLoginDataError } from "../error";
@@ -52,6 +52,12 @@ export namespace service {
 
     return foundUser.rows[0];
   };
+
+  export const getAllUsers = async () => {
+    const queryResult: QueryResult<tSelectUser> = await connection.query('SELECT id, "name", email, "admin", active FROM users');
+
+    return queryResult.rows;
+  }
 
   export const login = async (userData: tLoginData): Promise<iToken> => {
     const { email: loginEmail, password: loginPassword } = userData;

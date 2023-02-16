@@ -17,3 +17,16 @@ usersRouter.post(
   middleware.validateBody(schema.loginData),
   controller.login
 );
+
+usersRouter.get(
+  "",
+  middleware.validateToken,
+  middleware.validateAdminPermission,
+  controller.getAllUsers
+);
+
+usersRouter.get(
+  "/profile",
+  middleware.validateToken,
+  controller.getLoggedUserProfile
+);
