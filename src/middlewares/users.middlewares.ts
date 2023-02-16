@@ -1,22 +1,14 @@
-import { EmailAlreadyRegistered, InvalidTokenError } from "./../error";
+import {
+  EmailAlreadyRegistered,
+  InvalidTokenError,
+  PermissionError,
+} from "./../error";
 import { NextFunction, Request, Response } from "express";
 import { ZodTypeAny } from "zod";
 import { service } from "../services/users.services";
 import { verify } from "jsonwebtoken";
 
 export namespace middleware {
-  export const validateBody =
-    (schema: ZodTypeAny) =>
-    (req: Request, res: Response, next: NextFunction) => {
-      const { body: payload } = req;
-
-      const validatedPayload = schema.parse(payload);
-
-      req.body = validatedPayload;
-
-      next();
-    };
-
   export const userEmailIsUnique = async (
     req: Request,
     res: Response,
@@ -35,6 +27,18 @@ export namespace middleware {
 
     next();
   };
+
+  export const validateBody =
+    (schema: ZodTypeAny) =>
+    (req: Request, res: Response, next: NextFunction) => {
+      const { body: payload } = req;
+
+      const validatedPayload = schema.parse(payload);
+
+      req.body = validatedPayload;
+
+      next();
+    };
 
   export const validateToken = async (
     req: Request,
@@ -68,5 +72,19 @@ export namespace middleware {
         return next();
       }
     );
+  };
+
+  export const validateAdminPermission = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const isNotAdmin = !req.user.admin;
+
+    if (isNotAdmin) {
+      throw new PermissionError("Insufficient Permission", 401);
+    }
+
+    next();
   };
 }
