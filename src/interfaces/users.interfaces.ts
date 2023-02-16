@@ -9,6 +9,7 @@ export type tSelectUser = Omit<tUser, "password">;
 
 export interface iStatus {
   active: boolean;
+  [key: string]: boolean;
 }
 
 export interface iId {
