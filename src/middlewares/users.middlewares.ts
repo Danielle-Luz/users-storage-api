@@ -16,7 +16,7 @@ export namespace middleware {
     res: Response,
     next: NextFunction
   ) => {
-    const userEmail = req.body.email;
+    const userEmail = String(req.body?.email);
     const userData = await service.getUserDataByField(
       userEmail,
       ["id"],
