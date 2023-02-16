@@ -67,7 +67,7 @@ export namespace middleware {
 
         const userWithSameEmail: tSelectUser = await service.getUserDataByField(
           decoded.email,
-          ["id", "name", "email", "password", "admin", "active"],
+          ["id", "name", "email", "admin", "active"],
           "email"
         );
 

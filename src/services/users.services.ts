@@ -50,7 +50,7 @@ export namespace service {
     UPDATE users 
     SET (%I) = ROW(%L) 
     WHERE id = %L
-    RETURNING *
+    RETURNING id, "name", email, "admin", active
     `;
 
     const formattedQueryString = format(
