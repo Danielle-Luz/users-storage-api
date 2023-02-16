@@ -24,3 +24,9 @@ usersRouter.get(
   middleware.validateAdminPermission,
   controller.getAllUsers
 );
+
+usersRouter.get(
+  "/profile",
+  middleware.validateToken,
+  controller.getLoggedUserProfile
+);

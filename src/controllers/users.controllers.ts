@@ -24,4 +24,10 @@ export namespace controller {
 
     return res.status(200).send(allUsers);
   };
+
+  export const getLoggedUserProfile = async (req: Request, res: Response) => {
+    const loggedUser = req.user;
+
+    return res.status(200).send(loggedUser);
+  };
 }
