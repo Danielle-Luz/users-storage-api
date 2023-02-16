@@ -39,7 +39,7 @@ export namespace service {
   };
 
   export const updateUser = async (
-    updatedData: tUpdateUser,
+    updatedData: tUpdateUser | Pick<tUser, "active">,
     updatedUserId: number
   ) => {
     const updatedUserKeys = Object.keys(updatedData);
@@ -124,12 +124,4 @@ export namespace service {
 
     return { token };
   };
-
-  export const deleteUser = async (deletedUserId: number) => {
-    const queryString = "DELETE FROM users WHERE id = %L";
-
-    const formattedQueryString = format(queryString, deletedUserId);
-
-    await connection.query(formattedQueryString);
-  }
 }

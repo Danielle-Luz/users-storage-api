@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
-import { tCreateUser, tSelectUser } from "../interfaces/users.interfaces";
+import {
+  tCreateUser,
+  tSelectUser,
+  tUser,
+} from "../interfaces/users.interfaces";
 import { service } from "../services/users.services";
 
 export namespace controller {
@@ -34,7 +38,7 @@ export namespace controller {
 
     return res.status(200).send(loggedUser);
   };
-  
+
   export const login = async (req: Request, res: Response) => {
     const loginData = req.body;
 
@@ -45,9 +49,10 @@ export namespace controller {
 
   export const deleteUser = async (req: Request, res: Response) => {
     const deletedUserId = req.parsedParamId;
+    const inactiveStatus: Pick<tUser, "active"> = { active: false };
 
-    await service.deleteUser(deletedUserId);
+    await service.updateUser(inactiveStatus, deletedUserId);
 
     return res.status(204).send();
-  }
+  };
 }
