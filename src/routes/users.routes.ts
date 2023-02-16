@@ -48,3 +48,11 @@ usersRouter.delete(
   middleware.testIfHasSameId,
   controller.deleteUser
 );
+
+usersRouter.put(
+  "/:id/recover",
+  middleware.validateToken,
+  middleware.validateAdminPermission,
+  middleware.testIfIdExists,
+  controller.recoverUser
+);
