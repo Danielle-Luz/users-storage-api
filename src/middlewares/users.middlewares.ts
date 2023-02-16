@@ -1,5 +1,6 @@
 import {
   EmailAlreadyRegistered,
+  InvalidId,
   InvalidTokenError,
   PermissionError,
 } from "./../error";
@@ -87,6 +88,34 @@ export namespace middleware {
     if (isNotAdmin) {
       throw new PermissionError("Insufficient Permission", 403);
     }
+
+    next();
+  };
+
+  export const testIfIdExists = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const parsedParamId = parseInt(String(req.params.id));
+
+    let idWasNotFound: boolean = isNaN(parsedParamId);
+
+    if (!idWasNotFound) {
+      const foundUser = await service.getUserDataByField(
+        String(parsedParamId),
+        ["id"],
+        "id"
+      );
+
+      idWasNotFound = !foundUser;
+    }
+
+    if (idWasNotFound) {
+      throw new InvalidId("User not found", 404);
+    }
+
+    req.parsedParamId = parsedParamId;
 
     next();
   };
