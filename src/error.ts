@@ -18,7 +18,32 @@ export class EmailAlreadyRegistered extends AppError {
   }
 }
 
-export const errorHandler = (error: Error, req: Request, res: Response, next: NextFunction) => {
+export class InvalidLoginDataError extends AppError {
+  constructor(message: string, statusCode: number) {
+    super(message, statusCode);
+  }
+}
+
+export class InvalidTokenError extends AppError {
+  constructor(message: string, statusCode: number) {
+    super(message, statusCode);
+  }
+}
+
+export class InactiveUserError extends AppError {
+  constructor(message: string, statusCode: number) {
+    super(message, statusCode);
+  }
+}
+
+export const errorHandler = (
+  error: Error,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  console.error(error.stack);
+
   if (error instanceof AppError) {
     const { statusCode, message } = error;
 

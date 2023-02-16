@@ -1,10 +1,23 @@
+import { iToken } from "./../interfaces";
 import { connection } from "./../database/database.config";
 import { format } from "node-pg-format";
-import { iId, iUser } from "../interfaces/users.interfaces";
+import {
+  tCreateUser,
+  tLoginData,
+  tSelectUser,
+} from "../interfaces/users.interfaces";
 import { QueryResult } from "pg";
+import { compare, hash } from "bcryptjs";
+import { InactiveUserError, InvalidLoginDataError } from "../error";
+import { sign } from "jsonwebtoken";
 
 export namespace service {
-  export const createUser = async (newUser: iUser) => {
+  export const createUser = async (
+    newUser: tCreateUser
+  ): Promise<tSelectUser> => {
+    const encryptedPassword = await hash(newUser.password, 10);
+
+    newUser.password = encryptedPassword;
     const newUserKeys = Object.keys(newUser);
     const newUserData = Object.values(newUser);
 
@@ -16,24 +29,63 @@ export namespace service {
 
     const formattedQueryString = format(queryString, newUserKeys, newUserData);
 
-    const createdUser: QueryResult<iUser> = await connection.query(
+    const createdUser: QueryResult<tCreateUser> = await connection.query(
       formattedQueryString
     );
 
-    const { password, ...rest } = createdUser.rows[0];
+    const { password, ...dataWithoutPassword } = createdUser.rows[0];
 
-    return rest;
+    return dataWithoutPassword;
   };
 
-  export const getUserIdByEmail = async (searchedEmail: string) => {
-    const queryString = `SELECT id FROM users WHERE email = %L`;
+  export const getUserDataByField = async (
+    searchedValue: string,
+    selectedFields: string[],
+    comparedField: string
+  ): Promise<any> => {
+    const queryString = `SELECT %I FROM users WHERE %I = %L`;
 
-    const formattedQueryString = format(queryString, searchedEmail);
+    const formattedQueryString = format(
+      queryString,
+      selectedFields,
+      comparedField,
+      searchedValue
+    );
 
-    const foundUser: QueryResult<iId> = await connection.query(
+    const foundUser: QueryResult<any> = await connection.query(
       formattedQueryString
     );
 
     return foundUser.rows[0];
+  };
+
+  export const login = async (userData: tLoginData): Promise<iToken> => {
+    const { email: loginEmail, password: loginPassword } = userData;
+
+    const userWithSameEmail = await getUserDataByField(
+      loginEmail,
+      ["email", "password", "active"],
+      "email"
+    );
+
+    const userIsNotActive = !userWithSameEmail.active;
+    const userWasNotFound = !userWithSameEmail;
+    const userDontHasSamePassword = !compare(
+      loginPassword,
+      String(userWithSameEmail?.password)
+    );
+
+    if (userWasNotFound || userDontHasSamePassword) {
+      throw new InvalidLoginDataError("E-mail or password are wrong", 401);
+    } else if (userIsNotActive) {
+      throw new InactiveUserError("The user is not active", 401);
+    }
+
+    const token = sign({ email: loginEmail }, String(process.env.SECRET_KEY), {
+      expiresIn: "24h",
+      subject: loginEmail,
+    });
+
+    return { token };
   };
 }
