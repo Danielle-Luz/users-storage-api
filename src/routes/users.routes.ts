@@ -40,3 +40,11 @@ usersRouter.get(
   middleware.validateToken,
   controller.getLoggedUserProfile
 );
+
+usersRouter.delete(
+  "/:id",
+  middleware.validateToken,
+  middleware.testIfIdExists,
+  middleware.testIfHasSameId,
+  controller.deleteUser
+);
