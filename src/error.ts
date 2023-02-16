@@ -36,6 +36,12 @@ export class InactiveUserError extends AppError {
   }
 }
 
+export class PermissionError extends AppError {
+  constructor(message: string, statusCode: number) {
+    super(message, statusCode);
+  }
+}
+
 export const errorHandler = (
   error: Error,
   req: Request,

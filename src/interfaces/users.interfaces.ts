@@ -5,6 +5,7 @@ export type tUser = z.infer<typeof schema.user>;
 export type tCreateUser = z.infer<typeof schema.createUser>;
 export type tUpdateUser = z.infer<typeof schema.updateUser>;
 export type tLoginData = z.infer<typeof schema.loginData>;
+export type tSelectUser = Omit<tUser, "password">;
 
 export interface iId {
   id: number | null;
