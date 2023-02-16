@@ -39,7 +39,7 @@ export namespace service {
   };
 
   export const updateUser = async (
-    updatedData: tUpdateUser,
+    updatedData: tUpdateUser | Pick<tUser, "active">,
     updatedUserId: number
   ) => {
     const updatedUserKeys = Object.keys(updatedData);
