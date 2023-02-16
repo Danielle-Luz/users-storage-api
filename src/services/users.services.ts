@@ -1,7 +1,7 @@
 import { iToken } from "./../interfaces";
 import { connection } from "./../database/database.config";
 import { format } from "node-pg-format";
-import { tCreateUser, tLoginData, tUser, tSelectUser } from "../interfaces/users.interfaces";
+import { tCreateUser, tLoginData, tUser, tSelectUser, tUpdateUser } from "../interfaces/users.interfaces";
 import { QueryResult } from "pg";
 import { compare, hash } from "bcryptjs";
 import { InactiveUserError, InvalidLoginDataError } from "../error";
@@ -31,6 +31,10 @@ export namespace service {
 
     return dataWithoutPassword;
   };
+
+  export const updateUser = async (updatedData: tUpdateUser) => {
+
+  }
 
   export const getUserDataByField = async (
     searchedValue: string,
