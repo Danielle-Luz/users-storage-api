@@ -24,6 +24,12 @@ export class InvalidLoginDataError extends AppError {
   }
 }
 
+export class InvalidTokenError extends AppError {
+  constructor(message: string, statusCode: number) {
+    super(message, statusCode);
+  }
+}
+
 export const errorHandler = (
   error: Error,
   req: Request,
