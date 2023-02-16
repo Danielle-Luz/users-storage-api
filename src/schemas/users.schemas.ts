@@ -1,7 +1,8 @@
 import { z } from "zod";
 
 export namespace schema {
-  export const createUser = z.object({
+  export const user = z.object({
+    id: z.number(),
     name: z.string().max(20),
     email: z.string().max(100).email(),
     password: z.string().max(120),
@@ -9,7 +10,9 @@ export namespace schema {
     active: z.boolean(),
   });
 
-  export const updateUser = createUser.partial();
+  export const createUser = user.omit({ id: true, active: true });
 
-  export const loginData = createUser.pick({ email: true, password: true });
+  export const updateUser = createUser.partial().omit({ admin: true });
+
+  export const loginData = user.pick({ email: true, password: true });
 }
