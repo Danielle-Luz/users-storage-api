@@ -49,7 +49,7 @@ export const errorHandler = (
 
     return res.status(statusCode).send({ message });
   } else if (error instanceof ZodError) {
-    return res.status(400).send({ message: error.flatten().fieldErrors });
+    return res.status(400).send(error.flatten().fieldErrors);
   }
 
   return res.status(500).send({ message: "Internal server error" });
