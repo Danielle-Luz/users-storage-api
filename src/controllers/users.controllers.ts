@@ -11,6 +11,18 @@ export namespace controller {
     return res.status(201).send(createdUser);
   };
 
+  export const updateUser = async (req: Request, res: Response) => {
+    const updatedUserData = req.body;
+    const updatedUserId = req.parsedParamId;
+
+    const updatedUser = await service.updateUser(
+      updatedUserData,
+      updatedUserId
+    );
+
+    return res.status(200).send(updatedUser);
+  };
+
   export const login = async (req: Request, res: Response) => {
     const loginData = req.body;
 

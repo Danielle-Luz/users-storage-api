@@ -1,5 +1,6 @@
 import {
   EmailAlreadyRegistered,
+  InvalidId,
   InvalidTokenError,
   PermissionError,
 } from "./../error";
@@ -15,7 +16,7 @@ export namespace middleware {
     res: Response,
     next: NextFunction
   ) => {
-    const userEmail = req.body.email;
+    const userEmail = String(req.body?.email);
     const userData = await service.getUserDataByField(
       userEmail,
       ["id"],
@@ -91,12 +92,40 @@ export namespace middleware {
     next();
   };
 
+  export const testIfIdExists = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const parsedParamId = parseInt(String(req.params.id));
+
+    let idWasNotFound: boolean = isNaN(parsedParamId);
+
+    if (!idWasNotFound) {
+      const foundUser = await service.getUserDataByField(
+        String(parsedParamId),
+        ["id"],
+        "id"
+      );
+
+      idWasNotFound = !foundUser;
+    }
+
+    if (idWasNotFound) {
+      throw new InvalidId("User not found", 404);
+    }
+
+    req.parsedParamId = parsedParamId;
+
+    next();
+  };
+
   export const testIfHasSameId = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
-    const paramId = parseInt(String(req.params.id));
+    const paramId = req.parsedParamId;
     const loggedUserId = req.user.id;
 
     const isNotAdmin = !req.user.admin;

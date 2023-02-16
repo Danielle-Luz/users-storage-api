@@ -18,6 +18,16 @@ usersRouter.post(
   controller.login
 );
 
+usersRouter.patch(
+  "/:id",
+  middleware.validateToken,
+  middleware.testIfIdExists,
+  middleware.testIfHasSameId,
+  middleware.validateBody(schema.updateUser),
+  middleware.userEmailIsUnique,
+  controller.updateUser
+);
+
 usersRouter.get(
   "",
   middleware.validateToken,
