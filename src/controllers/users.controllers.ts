@@ -23,14 +23,6 @@ export namespace controller {
     return res.status(200).send(updatedUser);
   };
 
-  export const login = async (req: Request, res: Response) => {
-    const loginData = req.body;
-
-    const loggedUser = await service.login(loginData);
-
-    return res.status(200).send(loggedUser);
-  };
-
   export const getAllUsers = async (req: Request, res: Response) => {
     const allUsers: tSelectUser[] = await service.getAllUsers();
 
@@ -42,4 +34,20 @@ export namespace controller {
 
     return res.status(200).send(loggedUser);
   };
+  
+  export const login = async (req: Request, res: Response) => {
+    const loginData = req.body;
+
+    const loggedUser = await service.login(loginData);
+
+    return res.status(200).send(loggedUser);
+  };
+
+  export const deleteUser = async (req: Request, res: Response) => {
+    const deletedUserId = req.parsedParamId;
+
+    await service.deleteUser(deletedUserId);
+
+    return res.status(204).send();
+  }
 }
