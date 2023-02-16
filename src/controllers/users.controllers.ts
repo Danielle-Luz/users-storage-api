@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { tCreateUser } from "../interfaces/users.interfaces";
+import { tCreateUser, tSelectUser } from "../interfaces/users.interfaces";
 import { service } from "../services/users.services";
 
 export namespace controller {
@@ -17,5 +17,11 @@ export namespace controller {
     const loggedUser = await service.login(loginData);
 
     return res.status(200).send(loggedUser);
+  };
+
+  export const getAllUsers = async (req: Request, res: Response) => {
+    const allUsers: tSelectUser[] = await service.getAllUsers();
+
+    return res.status(200).send(allUsers);
   };
 }
