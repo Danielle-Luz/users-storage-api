@@ -1,20 +1,14 @@
 import { iToken } from "./../interfaces";
 import { connection } from "./../database/database.config";
 import { format } from "node-pg-format";
-import {
-  tCreateUser,
-  tLoginData,
-  tSelectUser,
-} from "../interfaces/users.interfaces";
+import { tCreateUser, tLoginData, tUser } from "../interfaces/users.interfaces";
 import { QueryResult } from "pg";
 import { compare, hash } from "bcryptjs";
 import { InactiveUserError, InvalidLoginDataError } from "../error";
 import { sign } from "jsonwebtoken";
 
 export namespace service {
-  export const createUser = async (
-    newUser: tCreateUser
-  ): Promise<tSelectUser> => {
+  export const createUser = async (newUser: tCreateUser) => {
     const encryptedPassword = await hash(newUser.password, 10);
 
     newUser.password = encryptedPassword;
@@ -29,7 +23,7 @@ export namespace service {
 
     const formattedQueryString = format(queryString, newUserKeys, newUserData);
 
-    const createdUser: QueryResult<tCreateUser> = await connection.query(
+    const createdUser: QueryResult<tUser> = await connection.query(
       formattedQueryString
     );
 
@@ -68,7 +62,7 @@ export namespace service {
       "email"
     );
 
-    const userIsNotActive = !userWithSameEmail.active;
+    const userIsNotActive = !userWithSameEmail?.active;
     const userWasNotFound = !userWithSameEmail;
     const userDontHasSamePassword = !compare(
       loginPassword,
