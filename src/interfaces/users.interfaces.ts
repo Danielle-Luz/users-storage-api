@@ -7,6 +7,10 @@ export type tUpdateUser = z.infer<typeof schema.updateUser>;
 export type tLoginData = z.infer<typeof schema.loginData>;
 export type tSelectUser = Omit<tUser, "password">;
 
+export interface iStatus {
+  active: boolean;
+}
+
 export interface iId {
   id: number | null;
 }

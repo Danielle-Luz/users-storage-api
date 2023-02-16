@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import {
+  iStatus,
   tCreateUser,
   tSelectUser,
   tUser,
@@ -49,10 +50,18 @@ export namespace controller {
 
   export const deleteUser = async (req: Request, res: Response) => {
     const deletedUserId = req.parsedParamId;
-    const inactiveStatus: Pick<tUser, "active"> = { active: false };
+    const inactiveStatus: iStatus = { active: false };
 
     await service.updateUser(inactiveStatus, deletedUserId);
 
     return res.status(204).send();
+  };
+
+  export const recoverUser = async (req: Request, res: Response) => {
+    const recoveredUserId = req.parsedParamId;
+
+    const recoveredUser = await service.recoverUser(recoveredUserId);
+
+    return res.status(200).send(recoveredUser);
   };
 }

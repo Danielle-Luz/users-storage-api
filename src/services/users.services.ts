@@ -1,3 +1,4 @@
+import { iStatus } from "./../interfaces/users.interfaces";
 import { iToken } from "./../interfaces";
 import { connection } from "./../database/database.config";
 import { format } from "node-pg-format";
@@ -10,7 +11,7 @@ import {
 } from "../interfaces/users.interfaces";
 import { QueryResult } from "pg";
 import { compare, hash } from "bcryptjs";
-import { InactiveUserError, InvalidLoginDataError } from "../error";
+import { UserStatusError, InvalidLoginDataError } from "../error";
 import { sign } from "jsonwebtoken";
 
 export namespace service {
@@ -39,7 +40,7 @@ export namespace service {
   };
 
   export const updateUser = async (
-    updatedData: tUpdateUser | Pick<tUser, "active">,
+    updatedData: tUpdateUser | iStatus,
     updatedUserId: number
   ) => {
     const updatedUserKeys = Object.keys(updatedData);
@@ -114,7 +115,7 @@ export namespace service {
     if (userWasNotFound || userDontHasSamePassword) {
       throw new InvalidLoginDataError("Wrong email/password", 401);
     } else if (userIsNotActive) {
-      throw new InactiveUserError("The user is not active", 401);
+      throw new UserStatusError("The user is not active", 401);
     }
 
     const token = sign({ email: loginEmail }, String(process.env.SECRET_KEY), {
@@ -123,5 +124,23 @@ export namespace service {
     });
 
     return { token };
+  };
+
+  export const recoverUser = async (recoveredUserId: number) => {
+    const recoveredUserData: iStatus = await getUserDataByField(
+      String(recoveredUserId),
+      ["active"],
+      "id"
+    );
+
+    if (recoveredUserData.active) {
+      throw new UserStatusError("User already active", 400);
+    }
+
+    const newActiveStatus: iStatus = { active: true };
+
+    const recoveredUser = await updateUser(newActiveStatus, recoveredUserId);
+
+    return recoveredUser;
   };
 }
