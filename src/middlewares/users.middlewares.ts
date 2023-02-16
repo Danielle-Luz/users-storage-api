@@ -41,12 +41,14 @@ export namespace middleware {
     res: Response,
     next: NextFunction
   ) => {
-    const token = req.headers?.authorization;
+    const tokenWithBearer = req.headers?.authorization;
 
-    const tokenWasNotSent = !token;
+    const tokenWasNotSent = !tokenWithBearer;
+
+    const token = String(tokenWithBearer).split(" ")[1];
 
     return verify(
-      String(token),
+      token,
       String(process.env.SECRET_KEY),
       async (error: any, decoded: any) => {
         const tokenIsNotValid = error;
