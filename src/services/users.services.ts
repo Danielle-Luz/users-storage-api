@@ -115,10 +115,10 @@ export namespace service {
 
     const userIsNotActive = !userWithSameEmail?.active;
     const userWasNotFound = !userWithSameEmail;
-    const userDontHasSamePassword = !compare(
+    const userDontHasSamePassword = !(await compare(
       loginPassword,
       String(userWithSameEmail?.password)
-    );
+    ));
 
     if (userWasNotFound || userDontHasSamePassword) {
       throw new InvalidLoginDataError("Wrong email/password", 401);
