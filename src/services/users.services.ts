@@ -8,7 +8,7 @@ import {
 } from "../interfaces/users.interfaces";
 import { QueryResult } from "pg";
 import { compare, hash } from "bcryptjs";
-import { InvalidLoginDataError } from "../error";
+import { InactiveUserError, InvalidLoginDataError } from "../error";
 import { sign } from "jsonwebtoken";
 
 export namespace service {
@@ -64,10 +64,11 @@ export namespace service {
 
     const userWithSameEmail = await getUserDataByField(
       loginEmail,
-      ["email", "password"],
+      ["email", "password", "active"],
       "email"
     );
 
+    const userIsNotActive = !userWithSameEmail.active;
     const userWasNotFound = !userWithSameEmail;
     const userDontHasSamePassword = !compare(
       loginPassword,
@@ -76,6 +77,8 @@ export namespace service {
 
     if (userWasNotFound || userDontHasSamePassword) {
       throw new InvalidLoginDataError("E-mail or password are wrong", 401);
+    } else if (userIsNotActive) {
+      throw new InactiveUserError("The user is not active", 401);
     }
 
     const token = sign({ email: loginEmail }, String(process.env.SECRET_KEY), {

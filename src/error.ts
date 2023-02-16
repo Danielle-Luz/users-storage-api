@@ -30,6 +30,12 @@ export class InvalidTokenError extends AppError {
   }
 }
 
+export class InactiveUserError extends AppError {
+  constructor(message: string, statusCode: number) {
+    super(message, statusCode);
+  }
+}
+
 export const errorHandler = (
   error: Error,
   req: Request,
