@@ -1,0 +1,908 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2023-02-16T06:32:33.128Z",
+  "__export_source": "insomnia.desktop.app:v2022.7.5",
+  "resources": [
+    {
+      "_id": "req_8c731919ee6d426ea875cee8aebf79c4",
+      "parentId": "fld_d3045cb05bb3498e83d5410ff631fdc6",
+      "modified": 1676527198986,
+      "created": 1676523893315,
+      "url": "{{ _.baseUrl }}/users/18",
+      "name": "Delete user with sucess",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_c169d408caa5421c995728b8aba9776a",
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676523893315,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_d3045cb05bb3498e83d5410ff631fdc6",
+      "parentId": "wrk_9c2e830749894ef7b8d70e87032b9557",
+      "modified": 1676523869506,
+      "created": 1676523869506,
+      "name": "Delete user",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1676523869507,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_9c2e830749894ef7b8d70e87032b9557",
+      "parentId": null,
+      "modified": 1676419790198,
+      "created": 1676419790198,
+      "name": "Users",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_8205a231ab7a4f5a913321c6ba34e738",
+      "parentId": "fld_d3045cb05bb3498e83d5410ff631fdc6",
+      "modified": 1676524810862,
+      "created": 1676524110975,
+      "url": "{{ _.baseUrl }}/users/18",
+      "name": "Delete user with same id and low permission",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_c169d408caa5421c995728b8aba9776a",
+          "name": "Authorization",
+          "value": "Bearer {{ _.lowPermissionToken }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676523022401.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_3b5f78ada18c4d078990a64cbfef29e4",
+      "parentId": "fld_d3045cb05bb3498e83d5410ff631fdc6",
+      "modified": 1676524038042,
+      "created": 1676524038042,
+      "url": "{{ _.baseUrl }}/users/0",
+      "name": "Error: delete another user with not admin token",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_c169d408caa5421c995728b8aba9776a",
+          "name": "Authorization",
+          "value": "Bearer {{ _.lowPermissionToken }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676522151488,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_495cbfa0b6c0461589309a9197de0414",
+      "parentId": "fld_d3045cb05bb3498e83d5410ff631fdc6",
+      "modified": 1676523968186,
+      "created": 1676523968186,
+      "url": "{{ _.baseUrl }}/users/0",
+      "name": "Error: missing token",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_c169d408caa5421c995728b8aba9776a",
+          "name": "",
+          "value": "",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676520409661,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_f36714f2c51d4253b215f66a6be31ddc",
+      "parentId": "fld_7ecec62393964e5b8a73331f50e41623",
+      "modified": 1676528315426,
+      "created": 1676526455169,
+      "url": "{{ _.baseUrl }}/users/7/recover",
+      "name": "Recover user with sucess",
+      "description": "",
+      "method": "PUT",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_c169d408caa5421c995728b8aba9776a",
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676523893315,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_7ecec62393964e5b8a73331f50e41623",
+      "parentId": "wrk_9c2e830749894ef7b8d70e87032b9557",
+      "modified": 1676526455165,
+      "created": 1676526455165,
+      "name": "Recover user",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1676520396733,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_c4fd79291f564a03aa8b01737207cfb3",
+      "parentId": "fld_7ecec62393964e5b8a73331f50e41623",
+      "modified": 1676526550622,
+      "created": 1676526455188,
+      "url": "{{ _.baseUrl }}/users/18/recover",
+      "name": "Error: try to recover with low permission",
+      "description": "",
+      "method": "PUT",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_c169d408caa5421c995728b8aba9776a",
+          "name": "Authorization",
+          "value": "Bearer {{ _.lowPermissionToken }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676523022401.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_160507007f0b487a8a51bd554e05e50c",
+      "parentId": "fld_7ecec62393964e5b8a73331f50e41623",
+      "modified": 1676526603074,
+      "created": 1676526455182,
+      "url": "{{ _.baseUrl }}/users/1/recover",
+      "name": "Error: user is already activated",
+      "description": "",
+      "method": "PUT",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_c169d408caa5421c995728b8aba9776a",
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676522151488,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_90400acd03cc42ce9dc2c1049541a58e",
+      "parentId": "fld_7ecec62393964e5b8a73331f50e41623",
+      "modified": 1676526555167,
+      "created": 1676526455175,
+      "url": "{{ _.baseUrl }}/users/0/recover",
+      "name": "Error: missing token",
+      "description": "",
+      "method": "PUT",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_c169d408caa5421c995728b8aba9776a",
+          "name": "",
+          "value": "",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676520409661,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_bf5ae0e20c3e4d27943a5d9ca3a0a6c3",
+      "parentId": "fld_7ecec62393964e5b8a73331f50e41623",
+      "modified": 1676527079875,
+      "created": 1676527056407,
+      "url": "{{ _.baseUrl }}/users/0/recover",
+      "name": "Error: user doesn't exist",
+      "description": "",
+      "method": "PUT",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_c169d408caa5421c995728b8aba9776a",
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676518667834,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_4303c2240b174f6d9202d0b6bda17fdf",
+      "parentId": "fld_bf73ae039fda419c8331126c91477536",
+      "modified": 1676517028809,
+      "created": 1676516926007,
+      "url": "{{ _.baseUrl }}/users",
+      "name": "Get all users",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_88f5c903a7e94b9bb777a78d81f76131",
+          "name": "authorization",
+          "value": "Bearer {{ _.token }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676516926007,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_bf73ae039fda419c8331126c91477536",
+      "parentId": "wrk_9c2e830749894ef7b8d70e87032b9557",
+      "modified": 1676516923959,
+      "created": 1676516923959,
+      "name": "Get users",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1676516923959,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_1dd7925b6b1c4539bc9348224b810cd4",
+      "parentId": "fld_bf73ae039fda419c8331126c91477536",
+      "modified": 1676524832149,
+      "created": 1676518683095,
+      "url": "{{ _.baseUrl }}/users/profile",
+      "name": "Get logged user",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_88f5c903a7e94b9bb777a78d81f76131",
+          "name": "authorization",
+          "value": "Bearer {{ _.lowPermissionToken }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676513130712.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_2510b43409ba44989fbf7b5b732ec037",
+      "parentId": "fld_bf73ae039fda419c8331126c91477536",
+      "modified": 1676518056084,
+      "created": 1676517104736,
+      "url": "{{ _.baseUrl }}/users",
+      "name": "Error: insufficient permission",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_0778415408384e29a15b2131862352ec",
+          "name": "",
+          "value": "",
+          "description": ""
+        }
+      ],
+      "headers": [
+        {
+          "id": "pair_88f5c903a7e94b9bb777a78d81f76131",
+          "name": "authorization",
+          "value": "Bearer {{ _.lowPermissionToken }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676509335418,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_f8f1bafd2b174a5f81fa8686645acbf8",
+      "parentId": "fld_bf73ae039fda419c8331126c91477536",
+      "modified": 1676517164535,
+      "created": 1676517117677,
+      "url": "{{ _.baseUrl }}/users",
+      "name": "Error: jwt mal formed",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "id": "pair_88f5c903a7e94b9bb777a78d81f76131",
+          "name": "authorization",
+          "value": "Bearer {{ _.wrongToken }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676505540123.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_f597c2c3ebdd44ea9e0f0ca9977c1ae6",
+      "parentId": "fld_bf73ae039fda419c8331126c91477536",
+      "modified": 1676518283151,
+      "created": 1676518274369,
+      "url": "{{ _.baseUrl }}/users",
+      "name": "Error: lacking token",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1676503642476.25,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_475e22ee79344a2598fd26b73b96f4bb",
+      "parentId": "fld_b0fb72993cf549d781b3f8d5a1d6b46d",
+      "modified": 1676528822130,
+      "created": 1676501744829,
+      "url": "{{ _.baseUrl }}/users/login",
+      "name": "Login with sucess",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\": \"testando2@gmail.com\",\n  \"password\": \"12345\"\n}"
+      },
+      "parameters": [],
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "authentication": {},
+      "metaSortKey": -1676501744829,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_b0fb72993cf549d781b3f8d5a1d6b46d",
+      "parentId": "wrk_9c2e830749894ef7b8d70e87032b9557",
+      "modified": 1676501732206,
+      "created": 1676501732206,
+      "name": "Login",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1676501732206,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_1f93628e83be4b3cbcc403826b7dc6e4",
+      "parentId": "fld_b0fb72993cf549d781b3f8d5a1d6b46d",
+      "modified": 1676511657328,
+      "created": 1676511651694,
+      "url": "{{ _.baseUrl }}/users/login",
+      "name": "Error: email not registered",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\": \"testando10@gmail.com\",\n  \"password\": \"12345\"\n}"
+      },
+      "parameters": [],
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "authentication": {},
+      "metaSortKey": -1676460770149,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_70a32ad0ddbe4664b6784b4bbac9a08f",
+      "parentId": "fld_5e61df1600b34df6a0b782621c8b9740",
+      "modified": 1676524743477,
+      "created": 1676419795469,
+      "url": "{{ _.baseUrl }}/users",
+      "name": "Create user with sucess",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Joana Abreu\",\n  \"email\": \"joana@gmail.com\",\n  \"password\": \"12345\",\n  \"admin\": true\n}"
+      },
+      "parameters": [],
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "authentication": {},
+      "metaSortKey": -1676419795469,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_5e61df1600b34df6a0b782621c8b9740",
+      "parentId": "wrk_9c2e830749894ef7b8d70e87032b9557",
+      "modified": 1676424892222,
+      "created": 1676424892222,
+      "name": "Create user",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1676424892222,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_dffb111da4b6480b86a58c16c1e844fe",
+      "parentId": "fld_5e61df1600b34df6a0b782621c8b9740",
+      "modified": 1676512460957,
+      "created": 1676434720463,
+      "url": "{{ _.baseUrl }}/users",
+      "name": "Error: lacking keys",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"teste@gmail.com\",\n  \"password\": \"12345\"\n}"
+      },
+      "parameters": [],
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "authentication": {},
+      "metaSortKey": -1676169342547.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_b3c8017687f04cb890c1f12e80413164",
+      "parentId": "fld_5e61df1600b34df6a0b782621c8b9740",
+      "modified": 1676517350291,
+      "created": 1676434801130,
+      "url": "{{ _.baseUrl }}/users",
+      "name": "Error: email in use",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Joana Abreu\",\n  \"email\": \"joana@gmail.com\",\n  \"password\": \"12345\",\n  \"admin\": false\n}"
+      },
+      "parameters": [],
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "authentication": {},
+      "metaSortKey": -1676106729317.125,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_4dc3d6d58b444dff9ab93dbf29521d04",
+      "parentId": "fld_5e61df1600b34df6a0b782621c8b9740",
+      "modified": 1676512531549,
+      "created": 1676434750643,
+      "url": "{{ _.baseUrl }}/users",
+      "name": "Error: wrong types",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": 5,\n  \"email\": [\"teste@gmail.com\"],\n  \"password\": 98908,\n  \"admin\": \"false\"\n}"
+      },
+      "parameters": [],
+      "headers": [{ "name": "Content-Type", "value": "application/json" }],
+      "authentication": {},
+      "metaSortKey": -1676044116086.75,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_836bf099f4ee453e89aa5e8688b4b4ad",
+      "parentId": "fld_812c8fc8eab949a59970f1df0f422567",
+      "modified": 1676528288656,
+      "created": 1676522180999,
+      "url": "{{ _.baseUrl }}/users/7",
+      "name": "Update user with sucess",
+      "description": "",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Carlinhos Maia\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_e37acc98787848da9c7d7043507e4a2f"
+        },
+        {
+          "id": "pair_e56cee842462446080d5c8d60622d1f7",
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676419795469,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_812c8fc8eab949a59970f1df0f422567",
+      "parentId": "wrk_9c2e830749894ef7b8d70e87032b9557",
+      "modified": 1676522180994,
+      "created": 1676522180994,
+      "name": "Update user",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1676168401998,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_24cb682d58724f8d8a72fe95f4129fec",
+      "parentId": "fld_812c8fc8eab949a59970f1df0f422567",
+      "modified": 1676522621492,
+      "created": 1676522621492,
+      "url": "{{ _.baseUrl }}/users/0",
+      "name": "Update another user as admin",
+      "description": "",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Paula Moraes\",\n  \"email\": \"paula@gmail.com\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_e37acc98787848da9c7d7043507e4a2f"
+        },
+        {
+          "id": "pair_e56cee842462446080d5c8d60622d1f7",
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676357182238.625,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_56940dca018847bea6696396ce1219e7",
+      "parentId": "fld_812c8fc8eab949a59970f1df0f422567",
+      "modified": 1676522901295,
+      "created": 1676522650061,
+      "url": "{{ _.baseUrl }}/users/5",
+      "name": "Error:  update another user as a normal user",
+      "description": "",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Quero formir\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_e37acc98787848da9c7d7043507e4a2f"
+        },
+        {
+          "id": "pair_e56cee842462446080d5c8d60622d1f7",
+          "name": "Authorization",
+          "value": "Bearer {{ _.lowPermissionToken }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676325875623.4375,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_7504baa484454fb197924186c23d6074",
+      "parentId": "fld_812c8fc8eab949a59970f1df0f422567",
+      "modified": 1676522535575,
+      "created": 1676522494599,
+      "url": "{{ _.baseUrl }}/users/0",
+      "name": "Error: email in use",
+      "description": "",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Paula Moraes\",\n  \"email\": \"joana@gmail.com\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_e37acc98787848da9c7d7043507e4a2f"
+        },
+        {
+          "id": "pair_e56cee842462446080d5c8d60622d1f7",
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676294569008.25,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_8e7888644b254ef9843edb5ce647a82d",
+      "parentId": "fld_812c8fc8eab949a59970f1df0f422567",
+      "modified": 1676522562214,
+      "created": 1676522556705,
+      "url": "{{ _.baseUrl }}/users/0",
+      "name": "Error: wrong types",
+      "description": "",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Paula Moraes\",\n  \"email\": [\"joana@gmail.com\"]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_e37acc98787848da9c7d7043507e4a2f"
+        },
+        {
+          "id": "pair_e56cee842462446080d5c8d60622d1f7",
+          "name": "Authorization",
+          "value": "Bearer {{ _.token }}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1676231955777.875,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_b25871149ffa788aa84f6044617f1aff90171953",
+      "parentId": "wrk_9c2e830749894ef7b8d70e87032b9557",
+      "modified": 1676419790208,
+      "created": 1676419790208,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1676419790208,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_b25871149ffa788aa84f6044617f1aff90171953",
+      "parentId": "wrk_9c2e830749894ef7b8d70e87032b9557",
+      "modified": 1676419790210,
+      "created": 1676419790210,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_fcbf4696a0a74c2e952854ec1b43303e",
+      "parentId": "wrk_9c2e830749894ef7b8d70e87032b9557",
+      "modified": 1676419790200,
+      "created": 1676419790200,
+      "fileName": "Users",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    },
+    {
+      "_id": "env_cf16ebfb89944fa9bc596ce7bc49238e",
+      "parentId": "env_b25871149ffa788aa84f6044617f1aff90171953",
+      "modified": 1676524777751,
+      "created": 1676419806461,
+      "name": "Local",
+      "data": {
+        "baseUrl": "http://localhost:3000",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvYW5hQGdtYWlsLmNvbSIsImlhdCI6MTY3NjUxNzI3MywiZXhwIjoxNjc2NjAzNjczLCJzdWIiOiJqb2FuYUBnbWFpbC5jb20ifQ.CDxTaGizW5fN7d5An-akbSsaNbPhK1tgWgCh8OnYzxs",
+        "lowPermissionToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hcmlhQGdtYWlsLmNvbSIsImlhdCI6MTY3NjUyNDc1MSwiZXhwIjoxNjc2NjExMTUxLCJzdWIiOiJtYXJpYUBnbWFpbC5jb20ifQ.CkUE6NJhpe92rFfGhPHVFrnWGr84b98VcOKUmw15PE0",
+        "wrongToken": "aaaaaaaaa"
+      },
+      "dataPropertyOrder": {
+        "&": ["baseUrl", "token", "lowPermissionToken", "wrongToken"]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1676419806461,
+      "_type": "environment"
+    }
+  ]
+}

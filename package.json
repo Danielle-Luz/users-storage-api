@@ -2,7 +2,7 @@
   "name": "api-users",
   "version": "1.0.0",
   "description": "API pra cadastro de usuários",
-  "main": "app.ts",
+  "main": "server.ts",
   "repository": "git@github.com:Kenzie-Academy-Brasil-Developers/m4-t14-crud-adm-danielle-luz.git",
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules --rs --cls src/server.ts"
