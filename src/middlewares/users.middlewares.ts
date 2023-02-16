@@ -7,6 +7,7 @@ import { NextFunction, Request, Response } from "express";
 import { ZodTypeAny } from "zod";
 import { service } from "../services/users.services";
 import { verify } from "jsonwebtoken";
+import { tSelectUser } from "../interfaces/users.interfaces";
 
 export namespace middleware {
   export const userEmailIsUnique = async (
@@ -63,9 +64,9 @@ export namespace middleware {
           throw new InvalidTokenError(error.message, 401);
         }
 
-        const userWithSameEmail = await service.getUserDataByField(
+        const userWithSameEmail: tSelectUser = await service.getUserDataByField(
           decoded.email,
-          ["email", "password"],
+          ["id", "name", "email", "password", "admin", "active"],
           "email"
         );
 
