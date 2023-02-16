@@ -82,7 +82,25 @@ export namespace middleware {
     const isNotAdmin = !req.user.admin;
 
     if (isNotAdmin) {
-      throw new PermissionError("Insufficient Permission", 401);
+      throw new PermissionError("Insufficient Permission", 403);
+    }
+
+    next();
+  };
+
+  export const testIfHasSameId = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const paramId = parseInt(String(req.params.id));
+    const loggedUserId = req.user.id;
+
+    const isNotAdmin = !req.user.admin;
+    const hasDifferentId = paramId !== loggedUserId;
+
+    if (isNotAdmin && hasDifferentId) {
+      throw new PermissionError("Insufficient Permission", 403);
     }
 
     next();
