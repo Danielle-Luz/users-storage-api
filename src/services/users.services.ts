@@ -139,8 +139,8 @@ export namespace service {
 
     const newActiveStatus: iStatus = { active: true };
 
-    const reactivatedUser = await updateUser(newActiveStatus, recoveredUserId);
+    const recoveredUser = await updateUser(newActiveStatus, recoveredUserId);
 
-    return reactivatedUser;
+    return recoveredUser;
   };
 }

@@ -56,4 +56,12 @@ export namespace controller {
 
     return res.status(204).send();
   };
+
+  export const recoverUser = async (req: Request, res: Response) => {
+    const recoveredUserId = req.parsedParamId;
+
+    const recoveredUser = await service.recoverUser(recoveredUserId);
+
+    return res.status(200).send(recoveredUser);
+  };
 }
