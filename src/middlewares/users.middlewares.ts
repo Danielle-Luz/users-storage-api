@@ -125,7 +125,7 @@ export namespace middleware {
     res: Response,
     next: NextFunction
   ) => {
-    const paramId = parseInt(String(req.params.id));
+    const paramId = req.parsedParamId;
     const loggedUserId = req.user.id;
 
     const isNotAdmin = !req.user.admin;
