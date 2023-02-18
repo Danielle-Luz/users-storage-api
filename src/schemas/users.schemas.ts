@@ -6,7 +6,7 @@ export namespace schema {
     name: z.string().max(20),
     email: z.string().max(100).email(),
     password: z.string().max(120),
-    admin: z.boolean(),
+    admin: z.boolean().optional().default(false),
     active: z.boolean(),
   });
 
