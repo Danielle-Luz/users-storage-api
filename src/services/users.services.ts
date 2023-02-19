@@ -79,7 +79,7 @@ export namespace service {
     searchedValue: string,
     selectedFields: string[],
     comparedField: string
-  ): Promise<any> => {
+  ) => {
     const queryString = `SELECT %I FROM users WHERE %I = %L`;
 
     const formattedQueryString = format(

@@ -15,3 +15,10 @@ export interface iStatus {
 export interface iId {
   id: number | null;
 }
+
+export interface iToken {
+  email: string;
+  iat: number;
+  exp: number;
+  sub: string;
+}
