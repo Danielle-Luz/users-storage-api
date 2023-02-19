@@ -6,6 +6,8 @@ export type tCreateUser = z.infer<typeof schema.createUser>;
 export type tUpdateUser = z.infer<typeof schema.updateUser>;
 export type tLoginData = z.infer<typeof schema.loginData>;
 export type tSelectUser = Omit<tUser, "password">;
+export type tValidateUser = Pick<tUser, "email" | "password" | "active">;
+export type tActive = Pick<tUser, "active">;
 
 export interface iStatus {
   active: boolean;

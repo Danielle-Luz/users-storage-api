@@ -1,4 +1,9 @@
-import { iStatus } from "./../interfaces/users.interfaces";
+import {
+  iId,
+  iStatus,
+  tActive,
+  tValidateUser,
+} from "./../interfaces/users.interfaces";
 import { iToken } from "./../interfaces";
 import { connection } from "./../database/database.config";
 import { format } from "node-pg-format";
@@ -89,9 +94,8 @@ export namespace service {
       searchedValue
     );
 
-    const foundUser: QueryResult<any> = await connection.query(
-      formattedQueryString
-    );
+    const foundUser: QueryResult<iId | tSelectUser | tValidateUser | tActive> =
+      await connection.query(formattedQueryString);
 
     return foundUser.rows[0];
   };
@@ -107,11 +111,11 @@ export namespace service {
   export const login = async (userData: tLoginData): Promise<iToken> => {
     const { email: loginEmail, password: loginPassword } = userData;
 
-    const userWithSameEmail = await getUserDataByField(
+    const userWithSameEmail = (await getUserDataByField(
       loginEmail,
       ["email", "password", "active"],
       "email"
-    );
+    )) as tValidateUser;
 
     const userIsNotActive = !userWithSameEmail?.active;
     const userWasNotFound = !userWithSameEmail;
@@ -135,11 +139,11 @@ export namespace service {
   };
 
   export const recoverUser = async (recoveredUserId: number) => {
-    const recoveredUserData: iStatus = await getUserDataByField(
+    const recoveredUserData: iStatus = (await getUserDataByField(
       String(recoveredUserId),
       ["active"],
       "id"
-    );
+    )) as tActive;
 
     if (recoveredUserData.active) {
       throw new UserStatusError("User already active", 400);

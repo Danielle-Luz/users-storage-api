@@ -8,7 +8,7 @@ import { NextFunction, Request, Response } from "express";
 import { ZodTypeAny } from "zod";
 import { service } from "../services/users.services";
 import { JwtPayload, verify, VerifyErrors, VerifyOptions } from "jsonwebtoken";
-import { iToken, tSelectUser } from "../interfaces/users.interfaces";
+import { iId, iToken, tSelectUser } from "../interfaces/users.interfaces";
 
 export namespace middleware {
   export const userEmailIsUnique = async (
@@ -21,7 +21,7 @@ export namespace middleware {
       userEmail,
       ["id"],
       "email"
-    );
+    ) as iId;
 
     if (userData?.id) {
       throw new EmailAlreadyRegistered("E-mail already registered", 409);
@@ -57,10 +57,6 @@ export namespace middleware {
 
     const token = String(tokenWithBearer).split(" ")[1];
 
-    const verifyOptions: VerifyOptions = {
-      algorithms: ["HS256"],
-    };
-
     return verify(
       token,
       String(process.env.SECRET_KEY),
@@ -78,7 +74,7 @@ export namespace middleware {
               decoded.email,
               ["id", "name", "email", "admin", "active"],
               "email"
-            );
+            ) as tSelectUser;
 
           req.user = userWithSameEmail;
 
