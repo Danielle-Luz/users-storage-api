@@ -7,8 +7,8 @@ import {
 import { NextFunction, Request, Response } from "express";
 import { ZodTypeAny } from "zod";
 import { service } from "../services/users.services";
-import { verify } from "jsonwebtoken";
-import { tSelectUser } from "../interfaces/users.interfaces";
+import { JwtPayload, verify, VerifyErrors, VerifyOptions } from "jsonwebtoken";
+import { iId, iToken, tSelectUser } from "../interfaces/users.interfaces";
 
 export namespace middleware {
   export const userEmailIsUnique = async (
@@ -21,7 +21,7 @@ export namespace middleware {
       userEmail,
       ["id"],
       "email"
-    );
+    ) as iId;
 
     if (userData?.id) {
       throw new EmailAlreadyRegistered("E-mail already registered", 409);
@@ -60,20 +60,26 @@ export namespace middleware {
     return verify(
       token,
       String(process.env.SECRET_KEY),
-      async (error: any, decoded: any) => {
+      async (
+        error: VerifyErrors | null,
+        decoded: string | JwtPayload | undefined
+      ) => {
+        decoded = decoded as iToken;
+
         if (error) {
           throw new InvalidTokenError(error.message, 401);
+        } else if (decoded) {
+          const userWithSameEmail: tSelectUser =
+            await service.getUserDataByField(
+              decoded.email,
+              ["id", "name", "email", "admin", "active"],
+              "email"
+            ) as tSelectUser;
+
+          req.user = userWithSameEmail;
+
+          return next();
         }
-
-        const userWithSameEmail: tSelectUser = await service.getUserDataByField(
-          decoded.email,
-          ["id", "name", "email", "admin", "active"],
-          "email"
-        );
-
-        req.user = userWithSameEmail;
-
-        return next();
       }
     );
   };
